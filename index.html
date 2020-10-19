@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            padding: 2%;
+            padding-top: 0;
+        }
+
+        button {
+            font-size: large;
+        }
+
+
+
+        .result2 {
+            background-color: lightgrey;
+
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="text-align: right;">Submited by: Ajit Kumar Singh</p>
+    <h3>Assignment</h3>
+    <p>
+        Rohit works at a clothing store. He has a large pile of socks that he must pair by colour for sale. Given an
+        array of integers representing the color of each sock, determine how many pairs of socks with matching colors
+        there are. For example, there are n=17 with color ar=[1,1,1,1,2,3,3,3,3,3,3,3,4,4,4,4,4] . There is two pair of
+        color 1 , three of color 3 and two of color 4 . There are three odd socks left, one of color 2 , color 3 and
+        color 4 . The number of pair is 7 .
+    </p><br>
+    <p>Problem:</p>
+    <p>
+        Write a program in Java Script that will take shocks array as input and returns number of pairs for every unique
+        color.
+    </p>
+    <button type="submit" onclick="myFunction()" color="green">Click here to enter the values and see the
+        Result</button>
+
+    <div style="color:red;">
+        <p id="error"></p>
+    </div>
+
+    <div class="result2">
+        <h1 style="text-align: center;">Result Display</h1>
+        <p id="n"></p>
+        <p id="colors-value"></p>
+        <p id="result1"></p>
+    </div>
+
+    <!--Java Script code-->
+    <script>
+        //function to add delay
+        function pause(milliseconds) {
+            var dt = new Date();
+            while ((new Date()) - dt <= milliseconds) { }
+        }
+
+        //main function
+        function myFunction() {
+            pause(600);
+            let n = parseFloat(prompt("Please enter the number of shocks (i.e. n)"));
+            pause(600);
+            console.log(n);
+            if (n > 0 && Number.isInteger(n)) {
+                document.getElementById("error").innerHTML = "";
+                let arr = [];
+                let obj = {};
+                let c = 0;
+                for (let i = 0; i < n; i++) {
+                    if (c > 0) {
+                        break;
+                    }
+                    let k;
+                    if ((i + 1) % 10 === 1 && (i + 1) % 100 != 11) {
+                        k = 'st';
+                    } else if ((i + 1) % 10 === 2 && (i + 1) % 100 != 13) {
+                        k = 'nd';
+                    } else if ((i + 1) % 10 === 3 && (i + 1) % 100 != 13) {
+                        k = 'rd';
+                    } else {
+                        k = 'th';
+                    }
+                    pause(500);
+                    let v = prompt("enter the color number of " + (i + 1) + k + " shocks    (n=" + n + ")")
+
+                    if (v == null || v == "") {
+                        c++;
+                        break;
+                    }
+
+                    while ((c == 0 && isNaN(parseInt(v)) && v != null) || !Number.isInteger(parseFloat(v))) {
+                        v = prompt("enter the color number of " + (i + 1) + k + " shocks     (n=" + n + ") \nplease enter only Integer value")
+
+                        console.log("value of v is: " + v)
+                        console.log(c)
+                        if (v == null || v == "") {
+                            c++;
+                            break;
+                        }
+                    }
+                    v = parseInt(v)
+                    arr.push(v)
+
+                    if (obj[v]) {
+                        obj[v]++;
+                    } else {
+                        obj[v] = 1;
+                    }
+
+                }
+                if (c == 0) {
+                    pause(400);
+
+
+                    let pairs = 0;
+
+                    for (let objValue in obj) {
+
+                        pairs += Math.floor(obj[objValue] / 2);
+
+                    }
+                    document.getElementById("n").innerHTML = "<hr><br>Total number of socks( i.e value of n ) = " + n + "<br><br>";
+                    document.getElementById("colors-value").innerHTML = "colour number of all shocks (i.e ar[]): " + "<br>" + arr + "<br>";
+                    document.getElementById("result1").innerHTML = "<br>Result:<br>The total number of matching pairs of socks that Rohit can sell : " + pairs + "<br>";
+                    //document.write("Total number of socks(  value of n ) = " + n + "<br><br>");
+                    //document.write("colour number of all shocks" + "<br>" + arr + "<br>");
+                    //document.write("<br>Result:<br>The total number of matching pairs of socks that Rohit can sell : " + pairs + "<br>");
+                } else {
+                    document.getElementById("error").innerHTML = "color code number  can't be null or empty";
+                }
+
+            } else {
+                document.getElementById("error").innerHTML = "The value of n should be positive integer only";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
